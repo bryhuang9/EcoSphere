@@ -1,0 +1,427 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+header .logo h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;  /* Center items horizontally */
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-left ul, .nav-right ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-left ul li, .nav-right ul li {
+    margin-left: 20px;
+}
+
+.nav-left ul li a, .nav-right ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Post styles */
+.content-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-form {
+    margin-bottom: 20px;
+    padding: 0 10px;  /* Add padding to the left and right */
+}
+
+.post-form input[type="text"],
+.post-form textarea {
+    width: calc(100% - 20px);  
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.post-form .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.post-form .post-button {
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.post-form .post-button:hover {
+    background-color: #4cae4c;
+}
+
+.post-form .emoji-button {
+    background-color: #f0ad4e;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 20%;
+    cursor: pointer;
+}
+
+.post-form .emoji-button:hover {
+    background-color: #ec971f;
+}
+
+.emoji-panel {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensure emoji panel takes full width */
+}
+
+.emoji-panel input[type="text"] {
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.emoji-panel #emoji-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px;
+}
+
+.emoji-panel #emoji-grid span {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.posts-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.posts-list ul li {
+    margin-bottom: 20px;  /* Add space between posts */
+}
+
+.post {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin: 5px 10px; /* Add margin to prevent overstretching */
+}
+
+.post-avatar {
+    flex-shrink: 0;
+}
+
+.post-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.post-content {
+    flex-grow: 1;
+}
+
+.post-content h3 {
+    margin: 0;
+}
+
+.post-status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.post-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.post-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.post-actions .delete-button {
+    color: #DAE2F1;
+}
+
+.post-actions .like-button {
+    color: #DAE2F1;
+}
+
+.post-actions .delete-button:hover,
+.post-actions .like-button:hover {
+    opacity: 0.8;
+    color: red
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+.like-button.liked {
+    color: red;
+}
+
+/* Profile Page Styles */
+.profile-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center; /* Center content */
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center items horizontally */
+    flex-direction: column; /* Stack items vertically */
+    margin-bottom: 20px;
+}
+
+.profile-avatar {
+    margin-bottom: 10px; /* Add space below avatar */
+}
+
+.profile-avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #3498db;
+}
+
+.profile-info h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #333;
+}
+
+.profile-info p {
+    margin: 5px 0 0 0;
+    color: #666;
+}
+
+.user-posts {
+    margin-top: 20px;
+}
+
+.user-posts h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    margin-left: 15px;
+}
+
+.no-posts {
+    margin-bottom: 20px;
+    color: #333;
+    margin-left: 15px;
+}
+
+.user-posts ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.user-posts ul li {
+    margin-bottom: 20px;
+}
+
+/* Styles for Login/Register page */
+.login-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 80vh;
+    background-color: #f4f4f4;
+}
+
+.login-register section {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.login-register h2 {
+    text-align: center;
+    color: #333;
+}
+
+.login-register form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-register label {
+    margin: 10px 0 5px;
+    color: #555;
+}
+
+.login-register input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.login-register button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.login-register button:hover {
+    background-color: #2980b9;
+}
+
+.login-register p {
+    text-align: center;
+    margin: 20px 0;
+    color: #666;
+}
+
+.login-register .error {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.google-login-button {
+    width: 100%; 
+    text-align: center; 
+    background-color: #3498db; 
+    color: #fff;  
+    border: none; 
+    padding: 10px;  
+    border-radius: 5px;  
+    cursor: pointer; 
+    margin-top: 10px; 
+}
+
+.google-login-button:hover {
+    background-color: #2980b9;  /* Same hover color */
+}
+
+/* Sorting options */
+.sort-options {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    padding-right: 10px;
+}
+
+.sort-options label {
+    margin-right: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+.sort-options select {
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}

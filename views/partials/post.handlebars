@@ -1,0 +1,81 @@
+{{! Partial for a single post }}
+<div class="post">
+    <div class="post-avatar">
+        <img src="{{#if avatar_url}}
+                      {{avatar_url}}
+                  {{else}}
+                      /avatar/{{username}}
+                  {{/if}}" 
+             alt="User Avatar" 
+             class="post-avatar-img">
+    </div>
+    <div class="post-content preserve-newlines">
+        <h3>{{title}}</h3>
+        <p>{{content}}</p>
+        <div class="post-status-bar">
+            <span>{{username}} - {{timestamp}}</span>
+            <div class="post-actions">
+                {{#ifCond ./user.username username}}
+                    <button class="delete-button" data-id="{{id}}" onclick="handleDeleteClick(event)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <span class="like-count">{{likes}} Likes</span>
+                {{else}}
+                    <button class="like-button {{#if (indexOf ./user.likedPosts id)}}liked{{/if}}" data-id="{{id}}" onclick="handleLikeClick(event)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                    <span class="like-count">{{likes}} Likes</span>
+                {{/ifCond}}
+            </div>
+        </div>        
+    </div>
+</div>
+
+<script>
+    async function handleLikeClick(event) {
+        const postId = event.target.closest('button').getAttribute('data-id');
+        const likeButton = event.target.closest('button');
+        const liked = likeButton.classList.contains('liked');
+
+        try {
+            const response = await fetch(`/like/${postId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ liked: !liked })
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                likeButton.classList.toggle('liked', !liked);
+                const likeCountElement = likeButton.nextElementSibling;
+                likeCountElement.innerHTML = `${result.likes} Likes`;
+            } else {
+                console.error('Failed to like the post');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    function handleDeleteClick(event) {
+        const buttonElement = event.target.closest('.delete-button');
+        const postId = buttonElement.getAttribute('data-id');        
+
+        // you might want to "fetch" something...        
+        fetch(`/delete/${postId}`, { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    // Remove the post from the UI
+                    const postElement = buttonElement.closest('.post');
+                    postElement.remove();
+                } else {
+                    console.error('Failed to delete the post');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }    
+</script>
