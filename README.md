@@ -1,8 +1,8 @@
-# MicroBlog
+# EcoSphere - Micro Blog
 
 STILL WORK IN PROGRESS
 
-MicroBlog is a simple blogging platform that allows users to register, log in, create posts, like other users' posts, and delete their own posts. The application uses Google OAuth for user authentication and an SQL database for data storage. It also supports sorting posts by likes or recency and integrates dynamic avatar generation and emoji support.
+EchoSphere is a simple blogging platform that allows users to register, log in, create posts, like other users' posts, and delete their own posts. The application uses Google OAuth for user authentication and an SQL database for data storage. It also supports sorting posts by likes or recency and integrates dynamic avatar generation and emoji support.
 
 ## Features
 
@@ -110,4 +110,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Brian Huang - [brian.yao.huang@gmail.com](mailto:brian.yao.huang@gmail.com)
 
-Project Link: [https://github.com/bryhuang9/Micro-Blog](https://github.com/bryhuang9/Micro-Blog)
+Project Link: [https://github.com/bryhuang9/EcoSphere](https://github.com/bryhuang9/EcoSphere)
