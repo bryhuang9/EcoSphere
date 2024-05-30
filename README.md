@@ -49,7 +49,7 @@ MicroBlog is a simple blogging platform that allows users to register, log in, c
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/microblog.git
+    git clone https://github.com/bryhuang9/microblog.git
     cd microblog
     ```
 
@@ -66,17 +66,21 @@ MicroBlog is a simple blogging platform that allows users to register, log in, c
     CLIENT_SECRET=your-google-client-secret
     ```
 
-4. Initialize the database:
+4. Initialize the database (if not already initialized):
     ```bash
     node database/populatedb.js
     ```
-
-5. Start the server:
+5. Show content in the database:
+    ```bash
+    node database/showdb.js
+    ```
+    
+6. Start the server:
     ```bash
     npm start
     ```
 
-6. Open your browser and navigate to `http://localhost:3000`.
+7. Open your browser and navigate to `http://localhost:3000`.
 
 ## Usage
 
@@ -104,6 +108,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name - [your.email@example.com](mailto:your.email@example.com)
+Brian Huang - [brian.yao.huang@gmail.com](mailto:brian.yao.huang@gmail.com)
 
-Project Link: [https://github.com/yourusername/microblog](https://github.com/yourusername/microblog)
+Project Link: [https://github.com/bryhuang9/Micro-Blog](https://github.com/bryhuang9/Micro-Blog)
