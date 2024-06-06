@@ -1,0 +1,20 @@
+{{! Use the main layout }}
+{{!< main }}
+
+<section class="content-container">
+    <h2>Search Results</h2>
+    
+    {{#if message}}
+        <p>{{message}}</p>
+    {{/if}}
+
+    {{#if posts.length}}
+        <ul>
+            {{#each posts}}
+                {{> post this user=../user}}    
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No results found.</p>
+    {{/if}}
+</section>

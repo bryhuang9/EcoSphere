@@ -298,6 +298,56 @@ app.post('/delete/:id', isAuthenticated, async (req, res) => {
     }
 });
 
+// Delete account route
+app.delete('/delete-account', isAuthenticated, async (req, res) => {
+    const userId = req.session.userId;
+
+    try {
+        // Find the username before deleting the user
+        const user = await findUserById(userId);
+
+        if (user) {
+            const username = user.username;
+
+            // Delete the user's posts from the database
+            await db.run('DELETE FROM posts WHERE username = ?', username);
+
+            // Delete the user from the database
+            await db.run('DELETE FROM users WHERE id = ?', userId);
+
+            // Destroy the session
+            req.session.destroy(err => {
+                if (err) {
+                    return res.status(500).send('Failed to delete account');
+                }
+                res.clearCookie('connect.sid');
+                res.status(200).send('Account deleted successfully');
+            });
+        } else {
+            res.status(404).send('User not found');
+        }
+    } catch (error) {
+        console.error('Error deleting account:', error);
+        res.status(500).send('Failed to delete account');
+    }
+});
+
+app.get('/search', async (req, res) => {
+    const searchQuery = req.query.q; // 'q' corresponds to the name of the input field in your form
+
+    // Handle the case where the search query is empty
+    if (!searchQuery) {
+        return res.render('searchResults', { posts: [], message: 'No keywords provided' });
+    }
+
+    try {
+        // Use the updated searchPosts function to search both content and username
+        const results = await searchPosts(searchQuery);
+        res.render('searchResults', { posts: results });
+    } catch (error) {
+        res.status(500).render('error', { error: 'Failed to process search query' });
+    }
+});
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Server Activation
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -480,11 +530,17 @@ async function getPosts() {
 }
 
 // Function to add a new post
-async function addPost(title, content, user) {
+async function addPost(title, content, user, imagePath = null) {
     await db.run(
-        'INSERT INTO posts (title, content, username, timestamp, likes) VALUES (?, ?, ?, ?, ?)',
-        [title, content, user.username, new Date().toISOString(), 0]
+        'INSERT INTO posts (title, content, username, timestamp, likes, imagePath) VALUES (?, ?, ?, ?, ?, ?)',
+        [title, content, user.username, new Date().toISOString(), 0, imagePath]
     );
+}
+
+async function searchPosts(query) {
+    const db = await getDBConnection(); 
+    const sql = "SELECT * FROM posts WHERE content LIKE ? OR username LIKE ?";
+    return db.all(sql, [`%${query}%`, `%${query}%`]); 
 }
 
 // Function to generate an image avatar

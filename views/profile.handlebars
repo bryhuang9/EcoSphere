@@ -1,6 +1,11 @@
 {{! Use the main layout }}
 {{!< main }}
 
+<!-- Add Delete Account Button at the top left under the navigation bar -->
+<section class="delete-account">
+    <button id="delete-account-button" onclick="confirmDeleteAccount()">Delete My Account</button>
+</section>
+
 <div class="profile-container">
     <div class="profile-avatar">
         <!-- Correct path for the default avatar image -->
@@ -38,3 +43,45 @@
         </div>
     {{/if}}
 </section>
+
+<!-- Dimmed Background Overlay -->
+<div id="dimmed-background" class="dimmed-background" style="display: none;"></div>
+
+<!-- Confirmation Prompt -->
+<div id="delete-account-confirmation" class="confirmation-box" style="display: none;">
+    <p>Are you sure you want to delete your account?</p>
+    <button onclick="deleteAccount()">Yes, delete my account</button>
+    <button onclick="cancelDelete()">No, keep my account</button>
+</div>
+
+<script>
+    function confirmDeleteAccount() {
+        document.getElementById('dimmed-background').style.display = 'block';
+        document.getElementById('delete-account-confirmation').style.display = 'block';
+    }
+
+    function cancelDelete() {
+        document.getElementById('dimmed-background').style.display = 'none';
+        document.getElementById('delete-account-confirmation').style.display = 'none';
+    }
+
+    async function deleteAccount() {
+        try {
+            const response = await fetch('/delete-account', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                window.location.href = '/login';
+            } else {
+                alert('Failed to delete account');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to delete account');
+        }
+    }
+</script>

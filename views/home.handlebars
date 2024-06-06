@@ -15,6 +15,7 @@
 
                 <div class="form-actions">
                     <button type="button" class="emoji-button" onclick="toggleEmojiPanel()">😀</button>
+                    <button type="button" class="giphy-button" onclick="toggleGiphyPanel()">GIF</button>
                     <button type="submit" class="post-button">Post</button>
                 </div>
             </form>
@@ -24,6 +25,11 @@
                 <!-- a div, id = "emoji-grid" -->
                 <input type="text" id="emoji-search" oninput="searchEmojis()" placeholder="Search emojis...">
                 <div id="emoji-grid"></div>
+            </div>
+
+            <div id="giphy-container" class="giphy-panel" style="display: none;">
+                <input type="text" id="giphy-search" oninput="searchGiphy()" placeholder="Search GIFs...">
+                <div id="giphy-grid"></div>
             </div>
         </section>
     {{/if}}
@@ -121,6 +127,49 @@ function insertEmoji(emoji) {
 function sortPosts() {
     const sortBy = document.getElementById('sort-by').value;
     window.location.href = `/?sort=${sortBy}`;
+}
+
+// Toggle Giphy Panel
+function toggleGiphyPanel() {
+    const container = document.getElementById('giphy-container');
+    container.style.display = container.style.display === 'none' ? 'block' : 'none';
+}
+
+// Search Giphy API
+async function searchGiphy() {
+    const searchTerm = document.getElementById('giphy-search').value;
+    const apiKey = '7BS5cGrVSxieaiVZy9Yh7Qsuy0whHF5F';
+    const url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${searchTerm}&limit=25&offset=0&rating=g&lang=en`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        displayGiphyResults(data.data);
+    } catch (error) {
+        console.error('Failed to fetch GIFs:', error);
+    }
+}
+
+// Display Giphy Results
+function displayGiphyResults(gifs) {
+    const container = document.getElementById('giphy-grid');
+    container.innerHTML = '';  // Clear previous results
+
+    gifs.forEach(gif => {
+        const gifElement = document.createElement('img');
+        gifElement.src = gif.images.fixed_height.url;
+        gifElement.alt = gif.title;
+        gifElement.style.cursor = 'pointer';
+        gifElement.onclick = () => insertGif(gif.images.fixed_height.url);
+        container.appendChild(gifElement);
+    });
+}
+
+// Insert GIF into Post Content
+function insertGif(gifUrl) {
+    const textarea = document.getElementById('post-content');
+    textarea.value += `<img src="${gifUrl}" alt="GIF">\n`;
+    textarea.focus();
 }
 </script>
 

@@ -1,7 +1,20 @@
+/* Define Pastel Colors */
+:root {
+    --pastel-blue: #779ECB;
+    --pastel-green: #77DD77;
+    --pastel-pink: #FFB7B2;
+    --pastel-purple: #B39EB5;
+    --pastel-yellow: #FDFD96;
+    --pastel-background: #F0F2F5;
+    --white: #FFFFFF;
+    --gray: #999999;
+}
+
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, var(--pastel-blue), var(--pastel-background));
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
     display: flex;
@@ -10,12 +23,13 @@ body {
 }
 
 header {
-    background-color: #333;
+    background: #304674;
     color: #fff;
     padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 header .logo {
@@ -67,6 +81,11 @@ nav {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-left ul li a:hover, .nav-right ul li a:hover {
+    color: #e0e0e0;
 }
 
 .header-avatar {
@@ -74,6 +93,7 @@ nav {
     height: 30px;
     border-radius: 50%;
     margin-left: 10px;
+    border: 2px solid #fff;
 }
 
 main {
@@ -89,12 +109,13 @@ main {
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .post-form {
     margin-bottom: 20px;
-    padding: 0 10px;  /* Add padding to the left and right */
+    padding: 0 10px;
 }
 
 .post-form input[type="text"],
@@ -103,30 +124,33 @@ main {
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 .post-form .form-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
+    gap: 10px;
 }
 
 .post-form .post-button {
-    background-color: #5cb85c;
+    background-color: #007BFF;
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    margin-left: auto;
 }
 
 .post-form .post-button:hover {
-    background-color: #4cae4c;
+    background-color: #0056b3;
 }
 
-.post-form .emoji-button {
-    background-color: #f0ad4e;
+.post-form .emoji-button,
+.post-form .giphy-button {
+    background-color: #007BFF;
     color: #fff;
     border: none;
     padding: 10px;
@@ -134,8 +158,9 @@ main {
     cursor: pointer;
 }
 
-.post-form .emoji-button:hover {
-    background-color: #ec971f;
+.post-form .emoji-button:hover,
+.post-form .giphy-button:hover {
+    background-color: #0056b3;
 }
 
 .emoji-panel {
@@ -143,7 +168,7 @@ main {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Ensure emoji panel takes full width */
+    width: 100%;
 }
 
 .emoji-panel input[type="text"] {
@@ -173,7 +198,7 @@ main {
 }
 
 .posts-list ul li {
-    margin-bottom: 20px;  /* Add space between posts */
+    margin-bottom: 20px; 
 }
 
 .post {
@@ -183,9 +208,13 @@ main {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    margin: 5px 10px; /* Add margin to prevent overstretching */
+    margin: 10px 10px; 
+}
+
+.post:hover {
+    transform: translateY(-5px);
 }
 
 .post-avatar {
@@ -204,6 +233,7 @@ main {
 
 .post-content h3 {
     margin: 0;
+    margin-bottom: 10px; 
 }
 
 .post-status-bar {
@@ -238,11 +268,11 @@ main {
 .post-actions .delete-button:hover,
 .post-actions .like-button:hover {
     opacity: 0.8;
-    color: red
+    color: #007BFF;
 }
 
 footer {
-    background-color: #333;
+    background-color: #304674;
     color: #fff;
     text-align: center;
     padding: 10px 0;
@@ -250,7 +280,7 @@ footer {
 }
 
 .like-button.liked {
-    color: red;
+    color:  #007BFF;
 }
 
 /* Profile Page Styles */
@@ -424,4 +454,154 @@ footer {
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ccc;
+}
+
+/* delete account button */
+.delete-account {
+    position: absolute;
+    top: 80px;
+    left: 10px;
+}
+
+#delete-account-button {
+    background-color: #ff4b5c; /* Red color for the button */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+#delete-account-button:hover {
+    background-color: #ff1a33; /* Darker red on hover */
+}
+
+#delete-account-confirmation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001; /* Ensure it is on top of the dimmed background */
+}
+
+#delete-account-confirmation p {
+    margin-bottom: 20px;
+}
+
+#delete-account-confirmation button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#delete-account-confirmation button:first-of-type {
+    background-color: #ff4b5c; /* Red color for confirmation button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#delete-account-confirmation button:last-of-type {
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Dimmed Background Overlay */
+.dimmed-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 1000; /* Ensure it is on top of other content */
+}
+
+/* search form */
+.search-form {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Allow the form to grow */
+    max-width: 600px; /* Optional: Set a maximum width */
+}
+
+.search-form input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1; /* Allow the input to take up remaining space */
+}
+
+.search-form button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 5px;
+    flex-shrink: 0; /* Prevent the button from shrinking */
+}
+
+.search-form button:hover {
+    background-color: #2980b9;
+}
+
+/* Giphy panel */
+.giphy-panel {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensure giphy panel takes full width */
+}
+
+.giphy-panel input[type="text"] {
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.giphy-panel #giphy-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px;
+}
+
+.giphy-panel #giphy-grid img {
+    width: 100px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.giphy-panel #giphy-grid img:hover {
+    opacity: 0.8;
+}
+
+/* Image upload */
+.giphy-button {
+    background-color: #f0ad4e;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 20%;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.giphy-button:hover {
+    background-color: #ec971f;
+}
+
+/* Add margin to post title */
+.post-content h3 {
+    margin-bottom: 10px; /* Add margin below the title */
 }
